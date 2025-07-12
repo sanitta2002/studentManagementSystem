@@ -12,5 +12,11 @@ export class AdminRepository implements IadminRepository{
     async getAllStudent(): Promise<Istudent[]> {
         return await studentModel.find({role:'student'})
     }
+    async getStudentById(id: string): Promise<Istudent |null> {
+        return await studentModel.findById(id)
+    }
+    async deleteOneStudentById(id: string): Promise<Istudent | null> {
+        return await studentModel.findByIdAndDelete(id)
+    }
     
 }

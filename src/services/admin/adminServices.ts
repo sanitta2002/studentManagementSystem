@@ -37,4 +37,18 @@ export class AdminServices implements IadminServices{
     async getallStudents(): Promise<Istudent[] | []> {
         return this.adminRepository.getAllStudent()
     }
+    async getStudentById(id: string): Promise<Istudent> {
+        const student=await this.adminRepository.getStudentById(id)
+        if(!student){
+            throw new Error('no student found')
+        }
+        return student
+    }
+    async deleteStudentById(id: string): Promise<Istudent| null> {
+        const student= await this.adminRepository.deleteOneStudentById(id)
+        if(!student){
+            throw new Error('no student found')
+        }
+        return student
+    }
 }

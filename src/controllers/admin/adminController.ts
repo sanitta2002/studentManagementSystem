@@ -33,4 +33,26 @@ export class AdminController{
             res.status(500).json({ success: false, message:'error' });
         }
     }
+    async getStudentDetails(req:Request,res:Response):Promise<void>{
+        try {
+            const {id}=req.params as {id:string}
+            const student=await this.adminServices.getStudentById(id)
+            if(student){
+                res.status(200).json({message:'student details fetched',student})
+            }
+        } catch (error) {
+             res.status(500).json({ success: false, message:"error" });
+        }
+    }
+    async deleteStudent(req:Request,res:Response):Promise<void>{
+        try {
+            const {id}=req.params as {id:string}
+            const deleteStudent=await this.adminServices.deleteStudentById(id)
+            if(deleteStudent){
+                res.status(200).json({message:"student deleted",deleteStudent})
+            }
+        } catch (error) {
+            res.status(500).json({success: false, message:"error"})
+        }
+    }
 }
